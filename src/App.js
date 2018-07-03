@@ -1,75 +1,31 @@
 import React, { Component } from 'react';
+import _ from 'lodash/fp'
 
-import logo from './logo.svg';
-import './App.css';
-import Timer from './components/Timer'
-import TimerControls from './components/TimerControls'
+import TimerBlock from './components/Timer/TimerBlock'
+import TodoBlock from './components/Todos/TodoBlock'
+import Header from './components/Header'
 
 import styled from 'styled-components'
 
-
-type Props = {}
-
-type State = {
-  timerIsRunning: boolean,
-  intervalTime: number[]
-}
-
-class App extends Component<Props, State> {
-
-  state = {
-    timerIsRunning: false,
-    intervalTime: [0]
-  }
-
-  timeIntervalSchedule = [[25], [3, 5], [25], [3, 5], [25], [3, 5], [25], [15, 30]]
-
-  onStartTimer = () => {
-   this.setState({
-     timerIsRunning: true,
-     intervalTime: this.timeIntervalSchedule.shift()
-   })
-  }
-
-  onTimerComplete = () => {
-    if(this.timeIntervalSchedule) {
-     window.alert('time is up!')
-     this.setState({
-      intervalTime: this.timeIntervalSchedule.pop()
-     })
-    }
-  }
-
-
-  render() {
-    return (
-      <AppWrapper>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Timer 
-          intervalTime={this.state.intervalTime}
-          timerIsRunning={this.state.timerIsRunning}
-          onTimerComplete={this.onTimerComplete}  
-        />
-        <TimerControls 
-          startTimer={this.onStartTimer}
-          />
-      </div>
-      </AppWrapper>
-    );
-  }
-}
+const App = () => (
+  <AppWrapper>
+    <Header />
+    <TimerBlock />
+    <TodoBlock />
+  </AppWrapper>
+)
 
 export default App;
 
 const AppWrapper = styled.div`
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  text-align: center;
+  width: 800px;
+  margin: 0 auto;
 `
