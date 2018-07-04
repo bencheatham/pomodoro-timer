@@ -19,13 +19,15 @@ export type TimeIntervalSchedlueItem = {
 type TimeIntervalSchedlue = Array<TimeIntervalSchedlueItem>
 
 type State = {
-  intervalTime: ?TimeIntervalSchedlueItem
+  intervalTime: ?TimeIntervalSchedlueItem,
+  timerIsRunning: boolean
 }
 
 class TimerBlock extends Component<Props, State> {
 
   state = {
-    intervalTime: null
+    intervalTime: null,
+    timerIsRunning: false
   }
 
   componentWillMount() {
@@ -35,6 +37,34 @@ class TimerBlock extends Component<Props, State> {
   //timeIntervalSchedule = [[25], [3, 5], [25], [3, 5], [25], [3, 5], [25], [15, 30]]
   //timeIntervalSchedule = [[0.1], [0.1, 0.2], [0.3], [0.1, 0.2], [0.3], [0.1, 0.2], [0.3], [0.1, 0.2]]
   
+  // timeIntervalSchedule = [
+  //   { 
+  //     type: 'work',
+  //     timeInterval: [25]
+  //   },
+  //   {
+  //     type: 'break',
+  //     timeInterval: [3, 5]
+  //   },
+  //   {
+  //     type: 'work',
+  //     timeInterval: [25]
+  //   },
+  //   {
+  //     type: 'break',
+  //     timeInterval: [3, 5]
+  //   },
+  //   {
+  //     type: 'work',
+  //     timeInterval: [25]
+  //   },
+  //   {
+  //     type: 'break',
+  //     timeInterval: [15, 30]]
+  //   }
+  // ]
+
+
   timeIntervalScheduleMaster: TimeIntervalSchedlue = [
     {
       type: 'work',
@@ -53,15 +83,24 @@ class TimerBlock extends Component<Props, State> {
   }
 
   startNextTimerInterval = () => {
-   this.setState({ intervalTime: this.timeIntervalSchedule.shift() })
+    if (!this.state.timerIsRunning) {
+      this.setState({ 
+        intervalTime: this.timeIntervalSchedule.shift(),
+        timerIsRunning: true 
+      })
+    }
   }
 
   onTimerComplete = () => {
-    if(!_.isEmpty(this.timeIntervalSchedule)) {
-     this.startNextTimerInterval()
-    } else {
-      this.loadNewIntervalSchedule()
-    }
+    this.setState({
+      timerIsRunning: false
+    }, () => {
+      if(!_.isEmpty(this.timeIntervalSchedule)) {
+        this.startNextTimerInterval()
+       } else {
+         this.loadNewIntervalSchedule()
+       }
+    })
   }
 
   render() {
