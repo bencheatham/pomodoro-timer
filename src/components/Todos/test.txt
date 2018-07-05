@@ -1,3 +1,0 @@
-requires a non-empty input
-
-adding a todo via the text input should append the todo in the un-ordered list on the dom

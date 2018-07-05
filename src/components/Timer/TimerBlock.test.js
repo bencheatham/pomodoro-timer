@@ -60,17 +60,17 @@ describe("TimerBlock", () => {
   it('should change the intervalTime state after 1 click', () => {
     expect(timerBlock().state().intervalTime).toEqual(null)
     timerBlock().find('button').simulate('click')
-    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [0.1], "type": "work"})
+    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [25], "type": "work"})
   })
 
   it('should not change the intervalTime state with more than 1 click', () => {
     expect(timerBlock().state().intervalTime).toEqual(null)
     timerBlock().find('button').simulate('click')
-    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [0.1], "type": "work"})
+    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [25], "type": "work"})
     timerBlock().find('button').simulate('click')
-    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [0.1], "type": "work"})
+    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [25], "type": "work"})
     timerBlock().find('button').simulate('click')
-    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [0.1], "type": "work"})
+    expect(timerBlock().state().intervalTime).toEqual({"timeInterval": [25], "type": "work"})
   })
 
 })

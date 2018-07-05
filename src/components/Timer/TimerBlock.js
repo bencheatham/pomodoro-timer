@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash/fp'
+import styled from 'styled-components'
 
 import Timer from './Timer'
 import TimerControls from './TimerControls'
-
-import styled from 'styled-components'
-
-
-type Props = {}
 
 type TimeIntervals = Array<number>
 
@@ -16,7 +12,11 @@ export type TimeIntervalSchedlueItem = {
   timeInterval: TimeIntervals,
 }
 
-type TimeIntervalSchedlue = Array<TimeIntervalSchedlueItem>
+type ConnectedProps = {}
+
+type OwnProps = {}
+
+type Props = OwnProps & ConnectedProps
 
 type State = {
   intervalTime: ?TimeIntervalSchedlueItem,
@@ -24,7 +24,8 @@ type State = {
 }
 
 class TimerBlock extends Component<Props, State> {
-
+  static props: Props
+  
   state = {
     intervalTime: null,
     timerIsRunning: false
@@ -34,49 +35,55 @@ class TimerBlock extends Component<Props, State> {
     this.loadNewIntervalSchedule()
   }
 
-  //timeIntervalSchedule = [[25], [3, 5], [25], [3, 5], [25], [3, 5], [25], [15, 30]]
-  //timeIntervalSchedule = [[0.1], [0.1, 0.2], [0.3], [0.1, 0.2], [0.3], [0.1, 0.2], [0.3], [0.1, 0.2]]
-  
-  // timeIntervalSchedule = [
-  //   { 
-  //     type: 'work',
-  //     timeInterval: [25]
-  //   },
-  //   {
-  //     type: 'break',
-  //     timeInterval: [3, 5]
-  //   },
-  //   {
-  //     type: 'work',
-  //     timeInterval: [25]
-  //   },
-  //   {
-  //     type: 'break',
-  //     timeInterval: [3, 5]
-  //   },
-  //   {
-  //     type: 'work',
-  //     timeInterval: [25]
-  //   },
-  //   {
-  //     type: 'break',
-  //     timeInterval: [15, 30]]
-  //   }
-  // ]
-
-
-  timeIntervalScheduleMaster: TimeIntervalSchedlue = [
-    {
+  timeIntervalScheduleMaster: TimeIntervalSchedlueItem[] = [
+    { 
       type: 'work',
-      timeInterval: [0.1]
+      timeInterval: [25]
     },
     {
       type: 'break',
-      timeInterval: [0.1, 0.2]
+      timeInterval: [3, 5]
+    },
+    {
+      type: 'work',
+      timeInterval: [25]
+    },
+    {
+      type: 'break',
+      timeInterval: [3, 5]
+    },
+    {
+      type: 'work',
+      timeInterval: [25]
+    },
+    {
+      type: 'break',
+      timeInterval: [3, 5]
+    },
+    {
+      type: 'work',
+      timeInterval: [25]
+    },
+    {
+      type: 'break',
+      timeInterval: [15, 30]
     }
   ]
 
-  timeIntervalSchedule: TimeIntervalSchedlue = []
+  /* The below data is available to test interval transitions using much smaller intervals  */
+  /* Simply uncomment the data below, and comment out the data above */
+  // timeIntervalScheduleMaster: TimeIntervalSchedlueItem[] = [
+  //   {
+  //     type: 'work',
+  //     timeInterval: [0.1]
+  //   },
+  //   {
+  //     type: 'break',
+  //     timeInterval: [0.1, 0.2]
+  //   }
+  // ]
+
+  timeIntervalSchedule: TimeIntervalSchedlueItem[] = []
 
   loadNewIntervalSchedule = () => {
     this.timeIntervalSchedule = [...this.timeIntervalScheduleMaster]

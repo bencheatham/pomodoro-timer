@@ -61,6 +61,15 @@ describe("AddTodo", () => {
       expect(addTodoMock).toHaveBeenCalled()
       expect(addTodoMock.mock.calls.length).toEqual(1)
     });
+    
+    it('should clear the input form after submitting a todo', () => {
+      addTodo().setState({inputFormTodo: 'hi there'})
+      expect(addTodo().state().inputFormTodo).toBe('hi there')
+      addTodo().find('button').simulate('click')
+      expect(addTodoMock).toHaveBeenCalled()
+      expect(addTodo().state().inputFormTodo).toBe('')
+      expect(addTodo().find('input').props().value).toBe('')
+    })
 
     it('Should be disabled when there is no text in the input', () => {
       const disabled = addTodo().find('.todo-submit').html().includes('disabled=""');

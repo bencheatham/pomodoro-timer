@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash/fp'
+import styled from 'styled-components'
 
 import TimerBlock from './components/Timer/TimerBlock'
 import TodoBlock from './components/Todos/TodoBlock'
 import Header from './components/Header'
 
-import styled from 'styled-components'
 
 const App = () => (
   <AppWrapper>

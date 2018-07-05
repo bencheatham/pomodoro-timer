@@ -24,6 +24,13 @@ export default class AddTodo extends Component<Props, State> {
       inputFormTodo: e.target.value
     })
   }
+
+  handleAddTodoSubmit = () => {
+    this.props.createNewTodo(this.state.inputFormTodo)
+    this.setState({
+      inputFormTodo: ''
+    })
+  }
   
   render() {
     return (
@@ -37,7 +44,7 @@ export default class AddTodo extends Component<Props, State> {
         <button 
           className='todo-submit' 
           type='submit' 
-          onClick={() => this.props.createNewTodo(this.state.inputFormTodo)}
+          onClick={this.handleAddTodoSubmit}
           disabled={this.state.inputFormTodo.length ? false : true }
         >
           Add Todo
@@ -59,6 +66,7 @@ const AddTodoContainer = styled.div`
     color: white;
     border: none;
     width: 100px;
+    cursor: pointer;
   }
 `
 

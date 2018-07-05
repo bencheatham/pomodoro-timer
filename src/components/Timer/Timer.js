@@ -20,7 +20,6 @@ type Props = OwnProps & ConnectedProps
 const convertMinutesToSeconds = (minutes: number) => minutes * 60
 
 export default class Timer extends Component<Props, State> {
-  
   static props: Props
 
   state = {
@@ -45,7 +44,6 @@ export default class Timer extends Component<Props, State> {
     this.setState({ timeRemaining }, () => {
       this.intervalManager = window.setInterval(this.incrementTime, 1000)
     })
-    //test this function is only called once, even when button is hit multiple times
   }
 
   incrementTime = () => {
@@ -100,5 +98,4 @@ const Wrapper = styled.div`
    font-size: 72px;
    color: white;
  }
-
 `

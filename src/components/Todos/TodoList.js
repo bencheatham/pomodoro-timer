@@ -6,16 +6,13 @@ type OwnProps = {}
 
 type ConnectedProps = {
   todos: string[],
-  removeTodo: () => void
+  removeTodo: (e: SyntheticInputEvent<EventTarget>) => void
 }
 
 type Props = OwnProps & ConnectedProps
 
-
 const TodoList = (props: Props) => {
-  console.log('todos', props.todos)
   if (_.isEmpty(props.todos)) {
-    
     return (
       <TodoListContainer>
         <span>You Have No Todos!</span>
@@ -27,7 +24,7 @@ const TodoList = (props: Props) => {
     <TodoListContainer>
       <ul>
         {props.todos.map((todo, index) => (
-            <li className='task-item' key={index}>
+            <li className='task-item' key={index} id={index}>
               <div className='task-item-body'>
                 <input type="checkbox" className='task-checkbox' name="complete" value="complete" id={index} checked={false} onChange={props.removeTodo}/>
                 <div className='task-item-title-wrapper'>

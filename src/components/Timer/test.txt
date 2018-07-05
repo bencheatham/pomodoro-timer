@@ -1,9 +1,0 @@
-
-
-i should be able to start the timer again after a full session is up
-
-the timer should show 00:00 after the end of each session, and after the final session
-
-\
-should take from the next interval in the array
-
