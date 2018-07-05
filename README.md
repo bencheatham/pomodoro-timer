@@ -14,6 +14,7 @@ Also, state does not persist beyond a signle user session.
 The application is meant to be viewed in a modern web browser.
 
 This application satifies the following user stories:
+
 | # | User Story |
 | --------- | ------- | 
 | 1 | As a user, I must be able to easily start the timer. |
