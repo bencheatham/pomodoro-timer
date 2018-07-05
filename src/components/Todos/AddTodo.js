@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import _ from 'lodash/fp'
 
 type OwnProps = {}
 
@@ -19,7 +20,7 @@ export default class AddTodo extends Component<Props, State> {
     inputFormTodo: ''
   }
 
-  handleInputFormChange = (e: any) => {
+  handleInputFormChange = (e: SyntheticInputEvent<EventTarget>) => {
     this.setState({
       inputFormTodo: e.target.value
     })
@@ -45,7 +46,7 @@ export default class AddTodo extends Component<Props, State> {
           className='todo-submit' 
           type='submit' 
           onClick={this.handleAddTodoSubmit}
-          disabled={this.state.inputFormTodo.length ? false : true }
+          disabled={_.isEmpty(this.state.inputFormTodo)}
         >
           Add Todo
         </button>

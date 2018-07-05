@@ -25,11 +25,10 @@ export default class TodoBlock extends Component<Props, State> {
     this.setState({
       todos: [...this.state.todos, todo]
     })
-
   }
 
   removeTodo = (e: SyntheticInputEvent<EventTarget>) => {
-    const updatedTodos = [...this.state.todos].filter((todo, idx) => parseInt(idx, 10) !== e.target.id)
+    const updatedTodos = [...this.state.todos].filter((todo, idx) => parseInt(idx, 10) !== parseInt(e.target.id, 10))
     this.setState({ todos: updatedTodos })
   }
 
